@@ -18,7 +18,7 @@ Insert into account
 values U, P, E
 
 /*
-Get calendar ID's that user with userid U has access to
+Get calendar ID's that user with user_id U has access to
 */
 select calendar_id from calendar
 where user_id = U
@@ -40,3 +40,16 @@ create new comment with given values.  use Today() for date/time
 */
 insert into comment
 values T, A, today(), C
+
+/*
+Change information in a task T
+*/
+UPDATE task
+SET column1 = value1, column2 = value2, ...
+WHERE task_id = T;
+
+/*
+Add user C into your task T
+*/
+insert into user_in_task
+values U, T
