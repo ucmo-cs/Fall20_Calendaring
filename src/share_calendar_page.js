@@ -8,8 +8,8 @@ class ShareCalendar extends Component {
             userID: props.userID
         }
     }
-    calendar = ""
-    userShare = ""
+    calendar = "";
+    userShare = "";
     
     handleSubmit = () => {
         //Share selected calendar with selected user
