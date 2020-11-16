@@ -51,5 +51,11 @@ WHERE task_id = T;
 /*
 Add user C into your task T
 */
-insert into user_in_task
+insert into user_in_calendar
 values U, T
+
+/*
+Given user U and day D, get all tasks that the user is in for that specific day
+*/
+select * from (calendar join user_in_calendar on calendar.account_id = user_in_calendar.account_id) natural join task
+where user_id = given_user_id and date_due = given_date
