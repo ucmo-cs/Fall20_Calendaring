@@ -14,13 +14,31 @@ function NewAccount() {
           </div>
           <div class="col-lg-5">
             <h1 class="font-weight-light">New Account</h1>
-            <p>
-              Placeholder body paragraph
-            </p>
+            <div className="form">
+                        <div className="form-group">
+                            <label htmlForm="username">Username</label>
+                            <input type="text" name="username" placeholder="username"/>
+                      </div>
+                      <div className="form-group">
+                            <label htmlForm="email">Email</label>
+                            <input type="text" name="email" placeholder="email"/>
+                      </div>
+                      <div className="form-group">
+                      <label htmlForm="password">Password</label>
+                            <input type="text" name="password" placeholder="password"/>
+                      </div>
+                      <div className="form-group">
+                      <label htmlForm="conpassword">Confirm Password</label>
+                            <input type="text" name="conpassword" placeholder="conpassword"/>
+                      </div>
+                    </div>
+                </div>
+                <div className="footer">
+                    <button type="button" className="btn">Registar</button>
+                </div>
           </div>
         </div>
       </div>
-    </div>
   );
 }
 
