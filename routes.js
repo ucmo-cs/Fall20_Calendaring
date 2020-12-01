@@ -8,19 +8,30 @@ router.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
-// get car list
-router.get('/cars', function(req, res) {
-  let sql = `SELECT * FROM car`;
+// get account list
+router.get('/accounts', function(req, res) {
+  let sql = `SELECT * FROM account`;
   db.query(sql, function(err, data, fields) {
     if (err) throw err;
     res.json(data)
     })
   });
 
-// get car by id (uses a URL like localhost:8080/car/1 where 1 is id)
-router.get('/cars/:id', function(req, res) {
+// get account_id by username and password
+router.get('/accounts/:username/:password', function(req, res) {
+  const { username, password } = req.params;
+  let sql = `SELECT account_id FROM account WHERE username=(?) AND password=(?)`;
+  db.query(sql, [username, password], function(err, data, fields) {
+    if (err) throw err;
+    var [ item ] = data;
+    res.json(item)
+    })
+  });
+
+// get tasks by account_id
+router.get('/tasks/:id', function(req, res) {
   const { id } = req.params;
-  let sql = `SELECT * FROM car WHERE ID=(?)`;
+  let sql = `SELECT * FROM Task WHERE account_id=(?)`;
   db.query(sql, [id], function(err, data, fields) {
     if (err) throw err;
     var [ item ] = data;
