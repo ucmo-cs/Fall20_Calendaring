@@ -31,7 +31,7 @@ router.get('/accounts/:username/:password', function(req, res) {
 // get tasks by account_id
 router.get('/tasks/:id', function(req, res) {
   const { id } = req.params;
-  let sql = `SELECT * FROM Task WHERE account_id=(?)`;
+  let sql = `SELECT * FROM task join calendar on task.calendar_id = calendar.calendar_id WHERE account_id=(?)`;
   db.query(sql, [id], function(err, data, fields) {
     if (err) throw err;
     var [ item ] = data;
