@@ -82,15 +82,15 @@ router.get('/tasks/:id', function(req, res) {
   });
 
 // create task
-router.post('/tasks/:id', function(req, res) {
-  const { id } = req.params;
-  let sql = `INSERT INTO task(title, description, date_due, priority) VALUES (?)`;
+router.post('/tasks', function(req, res) {
+  const id = Math.floor(Math.random() * 10000)
+  let sql = `INSERT INTO task(task_id, account_id, title, description, date_due, priority) VALUES (?)`;
   let values = [
-    // task_id,
-    // calendar_id,
+    id,
+    req.body.account_id,
+    req.body.calendar_id,
     req.body.title,
     req.body.description,
-    // date_created,
     req.body.date_due,
     req.body.priority
   ];
