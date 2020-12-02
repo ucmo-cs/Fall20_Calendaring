@@ -25,8 +25,8 @@ class ApiService {
         return axios.post(API_BASE_URL, + 'tasks' + '/' + account_id + '/' + calendar_id + '/' + title + '/' + description);
     }
 
-    shareCalendar(calendar_id, account_id) {
-        return axios.post(""+API_BASE_URL, + 'calendars', account_id, calendar_id);
+    shareCalendar(entry) {
+        return axios.post(""+API_BASE_URL + 'calendars/', entry);
     }
     // deleteCar(carId) {
     //     return axios.delete(CAR_API_BASE_URL + '/' + carId);
