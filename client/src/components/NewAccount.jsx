@@ -1,6 +1,10 @@
 import React from "react";
 
 function NewAccount() {
+  const createAccount = (username, password, email) => {
+    apiService.newAccount({username: username, password: password, email: email})
+  }
+  
   return (
     <div className="new-account">
       <div class="container">
