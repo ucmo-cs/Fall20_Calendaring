@@ -31,7 +31,7 @@ function ShareCalendar() {
     const handleSubmit = () => {
         //Share selected calendar with selected user
         console.log((selCalendar.current) + ' ' + (selUser.current))
-        ApiService.shareCalendar(selCalendar.current, selUser.current).then(res => {console.log('success')});
+        ApiService.shareCalendar({calendar: selCalendar.current, user: selUser.current}).then(res => {console.log('success')});
 
     }
     const handleBack = () => {
