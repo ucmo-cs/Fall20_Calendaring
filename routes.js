@@ -44,6 +44,38 @@ router.get('/tasks/:id', function(req, res) {
   let sql = `SELECT * FROM task join calendar on task.calendar_id = calendar.calendar_id WHERE account_id=(?)`;
   db.query(sql, [id], function(err, data, fields) {
     if (err) throw err;
+    res.json(data)
+    })
+  });
+
+// get account_id by username and password
+router.get('/accounts/:username/:password', function(req, res) {
+  const { username, password } = req.params;
+  let sql = `SELECT account_id FROM account WHERE username=(?) AND password=(?)`;
+  db.query(sql, [username, password], function(err, data, fields) {
+    if (err) throw err;
+    var [ item ] = data;
+    res.json(item)
+    })
+  });
+
+// get tasks by account_id and date
+router.get('/tasks/:id/:year/:month/:day', function(req, res) {
+  const { id, year, month, day } = req.params;
+  let sql = `SELECT * FROM task join calendar on task.calendar_id = calendar.calendar_id WHERE account_id=(?) AND year(date_due)=(?) AND month(date_due)=(?) AND day(date_due)=(?)`;
+  db.query(sql, [id, year, month, day], function(err, data, fields) {
+    if (err) throw err;
+    var [ item ] = data;
+    res.json(item)
+    })
+  });
+
+// get tasks by account_id
+router.get('/tasks/:id', function(req, res) {
+  const { id } = req.params;
+  let sql = `SELECT * FROM task join calendar on task.calendar_id = calendar.calendar_id WHERE account_id=(?)`;
+  db.query(sql, [id], function(err, data, fields) {
+    if (err) throw err;
     var [ item ] = data;
     res.json(item)
     })
@@ -56,11 +88,11 @@ router.post('/tasks/:id', function(req, res) {
   let values = [
     // task_id,
     // calendar_id,
-    title,
-    description,
+    req.body.title,
+    req.body.description,
     // date_created,
-    date_due,
-    priority
+    req.body.date_due,
+    req.body.priority
   ];
   db.query(sql, [values], function(err, data, fields) {
     if (err) throw err;
@@ -75,8 +107,6 @@ router.post('/calendars', function(req, res) {
     req.body.calendar,
     req.body.user
   ];
-  console.log(values)
-  console.log(req.body)
   db.query(sql, [values], function(err, data, fields) {
     if (err) throw err;
     res.json(data)
@@ -84,14 +114,14 @@ router.post('/calendars', function(req, res) {
 });
 
 // create new account
-router.post('/accounts/:username/:password/:email', function(req, res) {
-  const id = Math.floor(Math.random() * 1000)
+router.post('/accounts', function(req, res) {
+  const id = Math.floor(Math.random() * 10000)
   let sql = `INSERT INTO account VALUES (?)`;
   let values = [
     id,
-    req.username,
-    req.password,
-    req.email
+    req.body.username,
+    req.body.password,
+    req.body.email
   ];
   db.query(sql, [values], function(err, data, fields) {
     if (err) throw err;
@@ -108,24 +138,14 @@ router.put('/cars/:id', function(req,res) {
   const { id } = req.params;
   let sql = `UPDATE car SET make = (?), model = (?), year = (?) WHERE ID=(?)`;
   let values = [
-    req.body.make,
-    req.body.model,
-    req.body.year,
-    id
+    id,
+    req.username,
+    req.password,
+    req.email
   ];
-  db.query(sql, values, function(err, data, fields) {
+  db.query(sql, [values], function(err, data, fields) {
     if (err) throw err;
     res.json(data)
-  })
-});
-
-// Delete a car  (uses a URL like localhost:8080/car/1 where 1 is id)
-router.delete('/cars/:id', function(req,res) {
-  const { id } = req.params;
-  let sql = `DELETE FROM car WHERE ID=(?)`;
-  db.query(sql, [id], function(err, data, fields) {
-    if (err) throw err;
-    res.json(data);
   })
 });
 
