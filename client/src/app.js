@@ -12,7 +12,7 @@ function App() {
 		<div className="container">
 			<Router>
 				<Navigation />
-					<h1 className="text-center" style={style}>Calendar App</h1>
+					<h1 className="text-center">Calendar App</h1>
 					<Switch>
 						<Route path="/" exact component={Home} />
 						<Route path="/new-account" component={NewAccount} />
@@ -33,6 +33,7 @@ function App() {
 						<Route path="/share-calendar" component={ShareCalendar} />
 					</Switch>
 			</Router>
+		</div>
 	);
 }
 
