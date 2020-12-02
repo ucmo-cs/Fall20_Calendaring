@@ -53,9 +53,11 @@ router.get('/tasks/:id', function(req, res) {
 router.post('/calendars', function(req, res) {
   let sql = `INSERT INTO user_in_calendar VALUES (?)`;
   let values = [
-    req.body.calendar_id,
-    req.body.account_id
+    req.body.calendar,
+    req.body.user
   ];
+  console.log(values)
+  console.log(req.body)
   db.query(sql, [values], function(err, data, fields) {
     if (err) throw err;
     res.json(data)
