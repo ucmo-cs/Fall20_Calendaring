@@ -24,7 +24,7 @@ function Calendar() {
         <div class="row-align-items-center my-5">
           <div class="col-lg-5">
            
-            <Accordion defaultActiveKey="0">
+            <Accordion>
               <Card>
                 <Card.Header>
                   <Accordion.Toggle as={Button} variant="link" eventKey="0">

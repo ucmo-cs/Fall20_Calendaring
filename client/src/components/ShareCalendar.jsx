@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
-import ApiService from "./../services/ApiService"
+import ApiService from "./../services/apiService"
 
 //Require userID sent from previous component
 
