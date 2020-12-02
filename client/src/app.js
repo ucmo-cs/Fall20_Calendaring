@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const ReactDOM = require('react-dom');
 
 function App() {
-	const [account_id, setAccountID] = useState(null)
+	const [account_id, setAccountID] = useState(null);
 
 	return (
 		account_id === null ?
@@ -14,8 +14,8 @@ function App() {
 				<Navigation />
 					<h1 className="text-center">Calendar App</h1>
 					<Switch>
-						<Route path="/" exact component={Home} />
 						<Route path="/new-account" component={NewAccount} />
+						<Route path="/" exact component={Home} />
 						<Route path="/login" component={Login} />
 					</Switch>
 			</Router>

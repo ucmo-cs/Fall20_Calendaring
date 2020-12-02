@@ -1,6 +1,6 @@
 const express = require('express'),
-  router = express.Router();
-  db = require('./db');
+  router = express.Router(),
+  db = require('./db'),
   path = require("path");
 
 // Static route for index.html
@@ -49,6 +49,25 @@ router.get('/tasks/:id', function(req, res) {
     })
   });
 
+// create task
+router.post('/tasks/:id', function(req, res) {
+  const { id } = req.params;
+  let sql = `INSERT INTO task(title, description, date_due, priority) VALUES (?)`;
+  let values = [
+    // task_id,
+    // calendar_id,
+    title,
+    description,
+    // date_created,
+    date_due,
+    priority
+  ];
+  db.query(sql, [values], function(err, data, fields) {
+    if (err) throw err;
+    res.json(data)
+  })
+});
+
 // share calendar
 router.post('/calendars', function(req, res) {
   let sql = `INSERT INTO user_in_calendar VALUES (?)`;
@@ -79,6 +98,10 @@ router.post('/accounts/:username/:password/:email', function(req, res) {
     res.json(data)
   })
 });
+
+/****************************************************
+  We kept these in to use as examples while working
+*****************************************************/
 
 // Update a car (uses a URL like localhost:8080/car/1 where 1 is id)
 router.put('/cars/:id', function(req,res) {

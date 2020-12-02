@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Calendar from 'react-calendar';
-import {Button, Modal} from 'react-bootstrap';
+import {Accordion, Button, Card, Modal} from 'react-bootstrap';
 import 'react-calendar/dist/Calendar.css';
 
 function Home() {
@@ -18,8 +18,22 @@ function Home() {
       <div class="container">
         <div class="row-align-items-center my-5">
           <div class="col-lg-5">
-            <h1 class="font-weight-light">Home</h1>
-            <p>Placeholder body paragraph</p>
+           
+            <Accordion defaultActiveKey="0">
+              <Card>
+                <Card.Header>
+                  <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                    Show Tasks
+                  </Accordion.Toggle>
+                </Card.Header>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    Tasks go here
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
+
           </div>
           <div class="col-lg-7">
           
