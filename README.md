@@ -1,9 +1,8 @@
-# express_example
-Simple Express/React Example
+# Calendaring Application
 
-This is a simple Express backend, React frontend example.
+This is project for the Fall 2020 Calendaring Team
 
-The React application is the compiled React application from
-the spring_example project at http://github.com/ucmo-cs ,
-and the HTML, js, and css files for that app are in the client subdirectory.
+run 'npm run build' from the client directory.
+Then run 'node app.js' from the root directory.
+Then go to localhost:8080 to run the application.
 
