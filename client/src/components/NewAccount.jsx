@@ -1,47 +1,31 @@
-import React from "react";
+import React, {useRef } from "react";
+import apiService from "../services/apiService";
 
 function NewAccount() {
-  const createAccount = (username, password, email) => {
-    apiService.newAccount({username: username, password: password, email: email})
+  const username = useRef("");
+  const password = useRef("");
+  const confirmPassword = useRef("");
+  const email = useRef("");
+
+  const createAccount = () => {
+    const set = {username: username.current, password: password.current, email: email.current}
+    console.log(set)
+    apiService.newAccount(set).then(res => {console.log('success')})
   }
-  
+
   return (
-    <div className="new-account">
-      <div class="container">
-        <div class="row align-items-center my-5">
-          <div class="col-lg-7">
-            <img
-              class="img-fluid rounded mb-4 mb-lg-0"
-              src="http://placehold.it/900x400"
-              alt=""
-            />
-          </div>
-          <div class="col-lg-5">
-            <h1 class="font-weight-light">New Account</h1>
-            <div className="form">
-                        <div className="form-group">
-                            <label htmlForm="username">Username</label>
-                            <input type="text" name="username" placeholder="username"/>
-                      </div>
-                      <div className="form-group">
-                            <label htmlForm="email">Email</label>
-                            <input type="text" name="email" placeholder="email"/>
-                      </div>
-                      <div className="form-group">
-                      <label htmlForm="password">Password</label>
-                            <input type="text" name="password" placeholder="password"/>
-                      </div>
-                      <div className="form-group">
-                      <label htmlForm="conpassword">Confirm Password</label>
-                            <input type="text" name="conpassword" placeholder="conpassword"/>
-                      </div>
-                    </div>
-                </div>
-                <div className="footer">
-                    <button type="button" className="btn">Registar</button>
-                </div>
-          </div>
-        </div>
+      <div>
+        <label>{'New Account'}</label> <br/><br/>
+        <label>{'Username: '}</label> 
+        <input id="uname" type="text" onChange={(e) => username.current = e.target.value}/><br/>
+        <label>{'Email: '}</label> 
+        <input id="eml" type="text" onChange={(e) => email.current = e.target.value}/><br/>
+        <label>{'Password: '}</label> 
+        <input id="pwd" type="text" onChange={(e) => password.current = e.target.value}/><br/>
+        <label>Confirm Password:</label>
+        <input id="confirmpassword" type="text" onChange={(e) => confirmPassword.current = e.target.value}/><br/>
+
+        <button id="login" value="Login" onClick={createAccount}>Register</button>
       </div>
   );
 }
