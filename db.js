@@ -5,9 +5,9 @@ var mysql = require('mysql');
 //local mysql db connection
 var connection = mysql.createConnection({
     host     : 'www.math-cs.ucmo.edu',
-    user     : 'spring_example',
-    password : 'letmein',
-    database : 'spring_example'
+    user     : 'F20Calendar',
+    password : 'F20Calendar12#$',
+    database : 'F20Calendar'
 });
 
 connection.connect(function(err) {

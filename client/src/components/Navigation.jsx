@@ -50,7 +50,15 @@ function Navigation(props) {
                       Login
                     </Link>
                   </li>
-
+                  <li
+                  class={`nav-item ${
+                    props.location.pathname === "/" ? "active" : ""
+                  }`}
+                  >
+                    <Link class="nav-link" to="/share-calendar">
+                      Share Calendar
+                    </Link>
+                  </li>
               </ul>
             </div>
         </div>
