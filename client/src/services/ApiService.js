@@ -4,8 +4,8 @@ const API_BASE_URL = 'http://localhost:8080/';
 
 class ApiService {
 
-    newAccount(username, email, password) {
-        return axios.post(API_BASE_URL, + 'accounts' + '/' + username + '/' + email + '/' + password);
+    newAccount(entry) {
+        return axios.post(API_BASE_URL, + 'accounts/', entry);
     }
     fetchAccountIds() {
         return axios.get(API_BASE_URL + 'accounts')
@@ -21,8 +21,11 @@ class ApiService {
     fetchTasks(account_id) {
         return axios.get(API_BASE_URL + 'tasks/' + account_id);
     }
-    addTask(account_id, calendar_id, title, description) {
-        return axios.post(API_BASE_URL, + 'tasks' + '/' + account_id + '/' + calendar_id + '/' + title + '/' + description);
+    fetchTasksByDate(account_id, year, month, date) {
+        return axios.get(API_BASE_URL + 'tasks/' + account_id + '/' + year + '/' + month + '/' + date);
+    }
+    addTask(account_id, entry) {
+        return axios.post(API_BASE_URL, + 'tasks' + '/', entry);
     }
 
     shareCalendar(entry) {
