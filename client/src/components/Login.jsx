@@ -1,32 +1,37 @@
-import React from "react";
+import React, { useRef } from 'react';
+import apiService from './../services/apiService'
 
 function Login() {
-  return (
-    <div className="contact">
-      <div class="container">        
-          <div class="row align-items-center my-5">
-          </div>
-          <div class="col-lg-5">
-            <h1 class="font-weight-light">Login</h1>
-            <div className="content">
-            <div className="form">
-              <div className="form-group">
-                <label htmlForm="username">Username</label>
-                <input type="text" name="username" placeholder="username"/>
-              </div>
-              <div className="form-group">
-                <label htmlForm="password">PassWord</label>
-                <input type="text" name="password" placeholder="password"/>
-              </div>
-            </div>
-          </div>
-          <div className="footer">
-            <button type="button" className="btn">Login</button>
-          </div>
-          </div>
+    const username = useRef("");
+    const password = useRef("");
+
+    const handleLogin = () => {
+        //Check to see if this is a legit user, and if so, log in
+        console.log(username.current + ' ' + password.current)
+        apiService.fetchAccounts(username.current, password.current)
+            .then(res => {
+                if (res.data.account_id !== undefined) {
+                    //Successful login
+                    let account_id = res.data.account_id;
+                    //Send to app.js
+                    console.log(account_id)
+                } else {
+                    console.log('fail')
+                }
+            })
+    }
+
+    return (
+        <div>
+            <label>{'Login'}</label> <br/><br/>
+            <label>{'Username: '}</label> 
+            <input id="username" type="text" onChange={(e) => username.current = e.target.value}/><br/>
+            <label>Password:</label>
+            <input id="password" type="text" onChange={(e) => password.current = e.target.value}/><br/>
+
+            <button id="login" value="Login" onClick={handleLogin}>Login</button>
         </div>
-      </div>
-  );
+    )
 }
 
-export default Login;
+export default Login 
