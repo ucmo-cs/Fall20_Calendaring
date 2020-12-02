@@ -25,7 +25,7 @@ class ApiService {
         return axios.get(API_BASE_URL + 'tasks/' + account_id + '/' + year + '/' + month + '/' + date);
     }
     addTask(entry) {
-        return axios.post(API_BASE_URL, + 'tasks/', entry);
+        return axios.post(API_BASE_URL + 'tasks/', entry);
     }
 
     shareCalendar(entry) {
