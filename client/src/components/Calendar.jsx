@@ -1,9 +1,14 @@
 import React, {useState} from "react";
-import Calendar from 'react-calendar';
+import MyCalendar from 'react-calendar';
 import {Accordion, Button, Card, Modal} from 'react-bootstrap';
 import 'react-calendar/dist/Calendar.css';
 
-function Home() {
+/*******************************************************
+ * This is a duplicate of Home for presentation purposes
+********************************************************/
+
+
+function Calendar() {
   //Modal functions
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -28,7 +33,24 @@ function Home() {
                 </Card.Header>
                 <Accordion.Collapse eventKey="0">
                   <Card.Body>
-                    Tasks go here
+                    <input type="checkbox" checked/>
+                    <label>Task 1</label><br/>
+                    <input type="checkbox"/>
+                    <label>Task 2</label><br/>
+                    <input type="checkbox"/>
+                    <label>Task 3</label><br/>
+                    <input type="checkbox"/>
+                    <label>Task 4</label>
+                    <Card style={{ width: '18rem' }}>
+                    <Card.Body>
+                      <Card.Title>Task 1</Card.Title>
+                      <Card.Text>
+                        Task description<br/>
+                        Date due<br/>
+                      </Card.Text>
+                      <Button variant="primary">Complete Task</Button>
+                    </Card.Body>
+                  </Card>
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
@@ -38,7 +60,7 @@ function Home() {
           <div class="col-lg-7">
           
           <div>
-            <Calendar 
+            <MyCalendar 
               onChange={onChange}
               value={date}
               showWeekNumbers //maybe remove this, shows what number week out of the year on the left
@@ -85,4 +107,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Calendar;
