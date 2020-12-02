@@ -17,6 +17,16 @@ router.get('/accounts', function(req, res) {
     })
   });
 
+  // get account list
+router.get('/calendars/:id', function(req, res) {
+  const { id } = req.params;
+  let sql = `SELECT * FROM calendar WHERE account_id=(?)`;
+  db.query(sql, [id], function(err, data, fields) {
+    if (err) throw err;
+    res.json(data)
+    })
+  });
+
 // get account_id by username and password
 router.get('/accounts/:username/:password', function(req, res) {
   const { username, password } = req.params;
@@ -39,13 +49,28 @@ router.get('/tasks/:id', function(req, res) {
     })
   });
 
-// create new car
-router.post('/cars', function(req, res) {
-  let sql = `INSERT INTO car(make, model, year) VALUES (?)`;
+// share calendar
+router.post('/calendars', function(req, res) {
+  let sql = `INSERT INTO user_in_calendar VALUES (?)`;
   let values = [
-    req.body.make,
-    req.body.model,
-    req.body.year    
+    req.body.calendar_id,
+    req.body.account_id
+  ];
+  db.query(sql, [values], function(err, data, fields) {
+    if (err) throw err;
+    res.json(data)
+  })
+});
+
+// create new account
+router.post('/accounts/:username/:password/:email', function(req, res) {
+  const id = Math.floor(Math.random() * 1000)
+  let sql = `INSERT INTO account VALUES (?)`;
+  let values = [
+    id,
+    req.username,
+    req.password,
+    req.email
   ];
   db.query(sql, [values], function(err, data, fields) {
     if (err) throw err;
